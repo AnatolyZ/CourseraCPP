@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 using namespace std;
 
 class Rational {
@@ -67,6 +68,20 @@ Rational operator*(const Rational& lhs,const Rational& rhs){
     	return Rational(lhs.Numerator() * rhs.Numerator(),
     			        lhs.Denominator() * rhs.Denominator());
     }
+ostream& operator<<(ostream& outstr,const Rational& r){
+	outstr << r.Numerator() << '/' << r.Denominator();
+	return outstr;
+}
+
+istream& operator>>(istream& instr,Rational& r){
+		int n,d;
+		if (instr >> n){
+			instr.ignore(1);
+			if (instr >> d) r = {n,d};
+		}
+
+	return instr;
+}
 int main() {
     {
         ostringstream output;
