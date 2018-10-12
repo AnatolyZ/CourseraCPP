@@ -144,7 +144,9 @@ int main() {
 				  if (date_stream.peek() == '-'){
 					  date_stream.ignore(1);
 					  date_stream >> d;
+					  date_stream.ignore(1);
 				  } else throw invalid_argument("Wrong date format: " + date_str);
+				  if (date_stream) throw invalid_argument("Wrong date format: " + date_str);
 				  string event;
 				  cmd_stream >> event;
 				  if (event != ""){
@@ -154,7 +156,8 @@ int main() {
 						  cout << "Event not found" << endl;
 					  }
 				  } else {
-					  cout << "Deleted " << db.DeleteDate({y,m,d}) << " events" << endl;
+					  int n = db.DeleteDate({y,m,d});
+					  cout << "Deleted " << n << " events" << endl;
 				  }
 			  } catch (invalid_argument& ia){
 				  cout << ia.what() << endl;
