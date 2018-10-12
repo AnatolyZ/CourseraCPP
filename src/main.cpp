@@ -17,7 +17,7 @@ int main() {
 			input >> v;
 			input.ignore(1);
 			cout << setw(10) << v;
-			--c;
+			if(--c) cout << ' ';
 		}
 		if (--rows) cout << endl;
 	}
