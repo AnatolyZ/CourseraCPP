@@ -19,8 +19,7 @@ int main() {
 			cout << setw(10) << v;
 			--c;
 		}
-		cout << endl;
-		--rows;
+		if (--rows) cout << endl;
 	}
 	return 0;
 }
