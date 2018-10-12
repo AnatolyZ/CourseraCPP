@@ -7,6 +7,7 @@ int main() {
 	cin >> qn;
 	while (qn){
 		string cmd;
+		cin >> cmd;
 		if (cmd == ""){
 
 		}else if (cmd == " "){
