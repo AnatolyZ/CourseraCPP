@@ -28,10 +28,30 @@ int main() {
 	cin >> qn;
 	while (qn){
 		string cmd;
-		if (cmd == ""){
-
-		}else if (cmd == " "){
-
+		cin >> cmd;
+		if (cmd == "name"){
+			unsigned int arg;
+			cin >> arg;
+			if (students_list.size() < arg){
+				cout << "bad request" << endl;
+			}else{
+				--arg;
+				cout << students_list[arg].name << ' '
+						<< students_list[arg].surname << endl;
+			}
+		}else if (cmd == "date"){
+			unsigned int arg;
+			cin >> arg;
+			if (students_list.size() < arg){
+				cout << "bad request" << endl;
+			}else{
+				--arg;
+				cout << students_list[arg].day << '.'
+						<< students_list[arg].month << '.'
+						<< students_list[arg].year << endl;
+			}
+		}else {
+			cout << "bad request" << endl;
 		}
 		--qn;
 	}
