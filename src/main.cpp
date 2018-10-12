@@ -1,19 +1,40 @@
 #include <iostream>
+#include <string>
 
-using namespace std;
+
+class Date {
+public:
+  int GetYear() const;
+  int GetMonth() const;
+  int GetDay() const;
+};
+
+bool operator<(const Date& lhs, const Date& rhs){
+	return true;
+}
+
+class Database {
+public:
+  void AddEvent(const Date& date, const string& event){
+
+  };
+  bool DeleteEvent(const Date& date, const string& event){
+
+  };
+  int  DeleteDate(const Date& date);
+
+  /* ??? */ Find(const Date& date) const;
+
+  void Print() const;
+};
 
 int main() {
-	int qn; // queries number
-	cin >> qn;
-	while (qn){
-		string cmd;
-		cin >> cmd;
-		if (cmd == ""){
+  Database db;
 
-		}else if (cmd == " "){
+  string command;
+  while (getline(cin, command)) {
+    // —читайте команды с потока ввода и обработайте каждую
+  }
 
-		}
-		--qn;
-	}
-	return 0;
+  return 0;
 }
