@@ -4,23 +4,44 @@ using namespace std;
 class Rational {
 public:
     Rational() {
-        // Реализуйте конструктор по умолчанию
+        numerator = 0;
+        denominator = 1;
     }
 
-    Rational(int numerator, int denominator) {
-        // Реализуйте конструктор
+    Rational(int p, int q) {
+    	if ((p < 0 && q < 0)||(p > 0 && q < 0)){
+    		p *= -1;
+    		q *= -1;
+    	}
+    	if (p == 0) q = 1;
+    	int lcd = LCD(p,q);
+    	numerator = p/lcd;
+    	denominator = q/lcd;
     }
 
     int Numerator() const {
-        // Реализуйте этот метод
+        return numerator;
     }
 
     int Denominator() const {
-        // Реализуйте этот метод
+        return denominator;
     }
 
 private:
-    // Добавьте поля
+    int denominator;
+    int numerator;
+    int LCD (int a, int b){
+    	a = abs(a);
+    	b = abs(b);
+		while (a > 0 && b > 0){
+			if (a > b) {
+				a %= b;
+			}else{
+				  b %= a;
+			}
+		}
+		return a + b;
+    }
 };
 
 int main() {
