@@ -15,7 +15,7 @@ public:
     }
 
     Rational(int p, int q) {
-    	if (q == 0) throw invalid_argument();
+    	if (q == 0) throw invalid_argument("Denominator can't be zero");
     	if ((p < 0 && q < 0)||(p > 0 && q < 0)){
     		p *= -1;
     		q *= -1;
@@ -66,7 +66,7 @@ Rational operator-(const Rational& lhs,const Rational& rhs){
     }
 
 Rational operator/(const Rational& lhs,const Rational& rhs){
-		if (rhs.Numerator() == 0) throw domain_error();
+		if (rhs.Numerator() == 0) throw domain_error("Division by zero");
     	return Rational(lhs.Numerator() * rhs.Denominator(),
     			        lhs.Denominator() * rhs.Numerator());
     }
