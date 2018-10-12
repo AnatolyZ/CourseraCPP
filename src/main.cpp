@@ -9,12 +9,15 @@ int main() {
 	input >> rows;
 	int columns;
 	input >> columns;
+
 	while (rows){
-		while (columns){
+		int c = columns;
+		while (c){
 			int v;
 			input >> v;
+			input.ignore(1);
 			cout << setw(10) << v;
-			--columns;
+			--c;
 		}
 		cout << endl;
 		--rows;
