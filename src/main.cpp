@@ -20,7 +20,7 @@ public:
 	  } else {
 		  throw invalid_argument("Month value is invalid: " + to_string(m));
 	  }
-	  if (d > 0 && d < 31){
+	  if (d > 0 && d < 32){
 		  day = d;
 	  } else {
 		  throw invalid_argument("Day value is invalid: " + to_string(d));
@@ -83,7 +83,7 @@ public:
 	  if (events_map.count(date) > 0){
 		  return events_map.at(date);
 	  } else {
-		  throw invalid_argument ("Event not found");
+		  throw domain_error ("Event not found");
 	  }
   };
   void Print() const{
@@ -124,11 +124,13 @@ int main() {
 					  date_stream.ignore(1);
 					  date_stream >> d;
 				  } else throw invalid_argument("Wrong date format: " + date_str);
+				  if (date_stream.good()) throw invalid_argument("Wrong date format: " + date_str);
 				  string event;
 				  cmd_stream >> event;
 				  db.AddEvent({y,m,d},event);
 			  } catch (invalid_argument& ia){
 				  cout << ia.what() << endl;
+				  return 1;
 			  }
 		  } else if (cmd == "Del"){
 			  string date_str;
@@ -144,9 +146,8 @@ int main() {
 				  if (date_stream.peek() == '-'){
 					  date_stream.ignore(1);
 					  date_stream >> d;
-					  date_stream.ignore(1);
 				  } else throw invalid_argument("Wrong date format: " + date_str);
-				  if (date_stream) throw invalid_argument("Wrong date format: " + date_str);
+				  if (date_stream.good()) throw invalid_argument("Wrong date format: " + date_str);
 				  string event;
 				  cmd_stream >> event;
 				  if (event != ""){
@@ -161,6 +162,7 @@ int main() {
 				  }
 			  } catch (invalid_argument& ia){
 				  cout << ia.what() << endl;
+				  return 1;
 			  }
 		  } else if (cmd == "Find"){
 			  string date_str;
@@ -177,16 +179,21 @@ int main() {
 					  date_stream.ignore(1);
 					  date_stream >> d;
 				  } else throw invalid_argument("Wrong date format: " + date_str);
+				  if (date_stream.good()) throw invalid_argument("Wrong date format: " + date_str);
 				  for (const auto& s:db.Find({y,m,d})){
 					  cout << s << endl;
 				  }
 			  } catch (invalid_argument& ia){
 				  cout << ia.what() << endl;
+				  return 1;
+			  } catch (domain_error& de){
+				  cout << de.what() << endl;
 			  }
 		  } else if (cmd == "Print"){
 			  db.Print();
 		  } else {
 			  cout << "Unknown command: " << cmd << endl;
+			  return 1;
 		  }
 	  }
   }
