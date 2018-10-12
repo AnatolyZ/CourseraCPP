@@ -5,14 +5,14 @@ using namespace std;
 struct Student{
 	string name;
 	string surname;
-	int day;
-	int month;
-	int year;
+	unsigned int day;
+	unsigned int month;
+	unsigned int year;
 };
 
 int main() {
 	vector<Student> students_list;
-	int sn; // students number
+	unsigned int sn; // students number
 	cin >> sn;
 	while (sn){
 		Student st;
@@ -24,7 +24,8 @@ int main() {
 		students_list.push_back(st);
 		--sn;
 	}
-	int qn; // queries number
+	unsigned int list_size = students_list.size();
+	unsigned int qn; // queries number
 	cin >> qn;
 	while (qn){
 		string cmd;
@@ -32,7 +33,7 @@ int main() {
 		if (cmd == "name"){
 			unsigned int arg;
 			cin >> arg;
-			if (students_list.size() < arg){
+			if (arg == 0 || arg > list_size){
 				cout << "bad request" << endl;
 			}else{
 				--arg;
@@ -42,7 +43,7 @@ int main() {
 		}else if (cmd == "date"){
 			unsigned int arg;
 			cin >> arg;
-			if (students_list.size() < arg){
+			if (arg == 0 || arg > list_size){
 				cout << "bad request" << endl;
 			}else{
 				--arg;
@@ -51,6 +52,8 @@ int main() {
 						<< students_list[arg].year << endl;
 			}
 		}else {
+			unsigned int arg;
+			cin >> arg;
 			cout << "bad request" << endl;
 		}
 		--qn;
